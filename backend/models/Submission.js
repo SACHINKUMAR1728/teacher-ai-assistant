@@ -9,4 +9,10 @@ const Submission = sequelize.define('Submission', {
   submissionDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
 });
 
+// Define associations
+Submission.associate = (models) => {
+  Submission.belongsTo(models.Assignment, { foreignKey: 'assignmentId' });
+  Submission.hasOne(models.Feedback, { foreignKey: 'submissionId' });
+};
+
 module.exports = Submission;

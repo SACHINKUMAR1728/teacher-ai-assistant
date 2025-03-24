@@ -8,4 +8,9 @@ const Feedback = sequelize.define('Feedback', {
   grade: { type: DataTypes.STRING },
 });
 
+// Define associations
+Feedback.associate = (models) => {
+  Feedback.belongsTo(models.Submission, { foreignKey: 'submissionId' });
+};
+
 module.exports = Feedback;

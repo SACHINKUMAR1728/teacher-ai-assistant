@@ -14,8 +14,12 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     fetchAssignments();
-    fetchFeedback();
   }, []);
+  useEffect(() => {
+    if (studentId) {
+      fetchFeedback();
+    }
+  }, [studentId]);
 
   const fetchAssignments = async () => {
     try {
@@ -101,12 +105,13 @@ const StudentDashboard = () => {
         {feedback.map((fb) => (
           <ListItem key={fb.id}>
             <ListItemText
-              primary={`Assignment ID: ${fb.assignmentId}`}
-              secondary={`Feedback: ${fb.feedbackText}`}
+              primary={`Assignment ID: ${fb.Submission.assignmentId}`} // Access via Submission
+              secondary={`Feedback: ${fb.feedbackText} | Grade: ${fb.grade}`}
             />
           </ListItem>
         ))}
       </List>
+
     </Container>
   );
 };

@@ -17,3 +17,12 @@ exports.uploadAssignment = async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 };
+
+exports.getAllAssignments = async (req, res) => {
+  try {
+    const assignments = await Assignment.findAll();
+    res.status(200).json({ success: true, data: assignments });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+};
