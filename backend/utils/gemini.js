@@ -6,20 +6,41 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Function to generate feedback
 const generateFeedback = async (evaluationResults) => {
+  console.log(evaluationResults);
   const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
   const prompt = `
-    You are a teacher evaluating a student's assignment. Provide constructive feedback based on the following evaluation results:
+You are a digital image processing professor evaluating a student's assignment. Compare the assignment requirements with the student's submission and provide detailed feedback:
 
-    - Grammar and Syntax: ${evaluationResults.tokens.length} tokens analyzed.
-    - Sentiment: ${evaluationResults.sentimentScore >= 0 ? 'Positive' : 'Negative'} sentiment detected.
-    - Key Sentences: ${evaluationResults.sentences.map(s => s.text.content).join(', ')}
+ASSIGNMENT REQUIREMENTS:
+${evaluationResults.assignmentText}
 
-    Feedback should include:
-    1. Strengths of the assignment.
-    2. Areas for improvement.
-    3. Suggestions for better performance in the future.
-  `;
+STUDENT SUBMISSION:
+${evaluationResults.submissionText}
+
+Provide structured feedback focusing on:
+1. CONTENT EVALUATION:
+   - Relevance to digital image processing topics
+   - Coverage of key concepts (image sampling, transformations, filtering, etc.)
+   - Technical accuracy
+
+2. STRUCTURE ANALYSIS:
+   - Logical flow of concepts
+   - Proper use of technical terminology
+   - Clarity of explanations
+
+3. IMPROVEMENTS NEEDED:
+   - Specific missing elements from the requirements
+   - Areas needing more depth or correction
+   - Suggested resources for better understanding
+
+4. FINAL ASSESSMENT:
+   - Overall score (0-100)
+   - Key strengths
+   - Critical weaknesses
+
+Note: The submission appears to discuss political theory rather than digital image processing. Address this fundamental mismatch in your feedback.
+`;
 
   try {
     const result = await model.generateContent(prompt);

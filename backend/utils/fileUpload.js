@@ -2,17 +2,25 @@
 const multer = require('multer');
 const path = require('path');
 
-// Set up storage for uploaded files
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Files will be saved in the 'uploads' folder
-  },
+  destination: (req, file, cb) => cb(null, 'uploads/'),
   filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname); // Unique filename
-  },
+    const ext = path.extname(file.originalname);
+    const name = `${Date.now()}-${Math.round(Math.random() * 1E9)}${ext}`;
+    cb(null, name);
+  }
 });
 
-// Initialize multer with the storage configuration
-const upload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/') || file.mimetype === 'application/pdf') {
+    cb(null, true);
+  } else {
+    cb(new Error('Unsupported file type'), false);
+  }
+};
 
-module.exports = upload;
+module.exports = multer({
+  storage,
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+});

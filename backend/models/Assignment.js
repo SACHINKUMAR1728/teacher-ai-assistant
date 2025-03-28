@@ -9,7 +9,7 @@ const Assignment = sequelize.define('Assignment', {
   instructions: { type: DataTypes.TEXT },
 });
 
-// Define associations
+// Association
 Assignment.associate = (models) => {
   Assignment.hasMany(models.Submission, { foreignKey: 'assignmentId' });
 };

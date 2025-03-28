@@ -1,18 +1,28 @@
-// backend/models/Submission.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Submission = sequelize.define('Submission', {
-  studentId: { type: DataTypes.INTEGER, allowNull: false },
-  assignmentId: { type: DataTypes.INTEGER, allowNull: false },
-  fileUrl: { type: DataTypes.STRING, allowNull: false },
-  submissionDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+  assignmentId: { 
+    type: DataTypes.INTEGER, 
+    allowNull: false 
+  },
+  fileUrl: { 
+    type: DataTypes.STRING, 
+    allowNull: false 
+  },
+  submissionDate: { 
+    type: DataTypes.DATE, 
+    defaultValue: DataTypes.NOW 
+  },
+  feedback: { 
+    type: DataTypes.TEXT // or DataTypes.JSON for structured feedback
+  }
 });
 
-// Define associations
+// Association
 Submission.associate = (models) => {
-  Submission.belongsTo(models.Assignment, { foreignKey: 'assignmentId' });
-  Submission.hasOne(models.Feedback, { foreignKey: 'submissionId' });
+  Submission.belongsTo(models.Assignment, { 
+    foreignKey: 'assignmentId' 
+  });
 };
-
 module.exports = Submission;
