@@ -10,7 +10,7 @@ const generateFeedback = async (evaluationResults) => {
   const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
   const prompt = `
-You are a digital image processing professor evaluating a student's assignment. Compare the assignment requirements with the student's submission and provide detailed feedback:
+You are a  professor evaluating a student's assignment. Compare the assignment requirements with the student's submission and provide detailed feedback:
 
 ASSIGNMENT REQUIREMENTS:
 ${evaluationResults.assignmentText}
@@ -20,8 +20,8 @@ ${evaluationResults.submissionText}
 
 Provide structured feedback focusing on:
 1. CONTENT EVALUATION:
-   - Relevance to digital image processing topics
-   - Coverage of key concepts (image sampling, transformations, filtering, etc.)
+   - Relevance to key topics and concepts of the assignment
+   - Coverage of key concepts.
    - Technical accuracy
 
 2. STRUCTURE ANALYSIS:
@@ -38,8 +38,6 @@ Provide structured feedback focusing on:
    - Overall score (0-100)
    - Key strengths
    - Critical weaknesses
-
-Note: The submission appears to discuss political theory rather than digital image processing. Address this fundamental mismatch in your feedback.
 `;
 
   try {

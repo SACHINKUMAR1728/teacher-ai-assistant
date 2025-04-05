@@ -4,11 +4,12 @@ const Assignment = require('../models/Assignment');
 
 // Get feedback by submission ID
 exports.getFeedbackBySubmission = async (req, res) => {
-  
+  console.log("Fetching feedback for assignment ID:", req.params.AssignmentId);
   try {
-    const submission = await Submission.findByPk(req.params.submissionId, {
-      
+    const submission = await Submission.findOne({
+      where: { assignmentId: req.params.AssignmentId }
     });
+    
 
     if (!submission) {
       return res.status(404).json({ message: 'No submission found' });

@@ -4,6 +4,6 @@ const router = express.Router();
 const feedbackController = require('../controllers/feedbackController');
 
 // Get feedback by submission ID (now directly from Submission table)
-router.get('/:submissionId', feedbackController.getFeedbackBySubmission);
+router.get('/:AssignmentId', feedbackController.getFeedbackBySubmission);
 
 module.exports = router;
