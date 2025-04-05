@@ -38,6 +38,7 @@ Provide structured feedback focusing on:
    - Overall score (0-100)
    - Key strengths
    - Critical weaknesses
+Only provide the feedback without any additional comments or explanations.
 `;
 
   try {

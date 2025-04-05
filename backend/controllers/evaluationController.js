@@ -8,16 +8,7 @@ const Assignment = require('../models/Assignment');
 
 exports.evaluateSubmission = async (assignmentId,submissionfileUrl) => {
   try {
-    // console.log("Evaluation request for submission ID:", req.params.id);
-
-    // Find submission
-    // const submission = await Submission.findOne({ where: { assignmentId, fileUrl } }); // Update to find submission by assignmentId and fileUrl
-    // if (!submission) {
-    //   console.error('Submission not found');
-    //   return res.status(404).json({ error: 'Submission not found' });
-    // }
-    // console.log("Assignemnt for submission found:", submission.assignmentId);
-    console.log("ENTERED EVALUATION FUNCTION");
+    
     const assignment = await Assignment.findByPk(assignmentId);
     console.log("Assignment found:", assignment);
     if (!assignment) {
@@ -25,11 +16,7 @@ exports.evaluateSubmission = async (assignmentId,submissionfileUrl) => {
       return 'Assignment not found';
       //return res.status(404).json({ error: 'Assignment not found' });
     }
-    //console.log(assignment.fileUrl, submissionfileUrl);
-
-
-
-    // Extract text from both files
+    
     const { assignmentText, submissionText } = await extractTextFromImage(
       assignment.fileUrl,
       submissionfileUrl
@@ -41,9 +28,6 @@ exports.evaluateSubmission = async (assignmentId,submissionfileUrl) => {
       submissionText
     });
 
-    // Update submission with feedback
-    // await submission.update({ feedback: feedbackText });
-    console.log('Evaluation completed successfully');
 
     
     return feedbackText

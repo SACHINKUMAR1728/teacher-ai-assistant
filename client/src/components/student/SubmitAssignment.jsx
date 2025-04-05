@@ -48,7 +48,7 @@ const SubmitAssignment = ({ assignment, onSubmit }) => {
       setFile(null);
 
       // Fetch feedback
-      const feedbackResponse = await fetch(`http://localhost:5000/api/evaluate/${assignment.id}`);
+      const feedbackResponse = await fetch(`http://localhost:5000/api/feedback/${assignment.id}`);
       if (!feedbackResponse.ok) throw new Error("Failed to fetch feedback");
       
       const feedback = await feedbackResponse.json();

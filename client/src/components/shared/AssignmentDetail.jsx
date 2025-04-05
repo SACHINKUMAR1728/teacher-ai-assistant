@@ -12,6 +12,7 @@ export const AssignmentDetail = ({
   viewType,
   onSubmit 
 }) => {
+  console.log("Assignment Detail:", assignment);
   const isExpired = isPast(new Date(assignment.deadline));
 
   return (
@@ -71,39 +72,8 @@ export const AssignmentDetail = ({
         </>
       )}
 
-
-      {/* {viewType === 'teacher' && assignment.submissions.length > 0 && (
-        <>
-          <Separator />
-          <div>
-            <h3 className="text-lg font-medium mb-3">Submissions ({assignment.submissions.length})</h3>
-            <div className="space-y-4">
-              {assignment.submissions.map((submission) => (
-                <SubmissionItem key={submission.id} submission={submission} />
-              ))}
-            </div>
-          </div>
-        </>
-      )} */}
-
-      {viewType === 'student' && (
-        <>
-          <Separator />
-          <div>
-            <h3 className="text-lg font-medium mb-3">Your Submission</h3>
-           
-          </div>
-        </>
-      )}
-
-      {viewType === 'student' && (
-        <div className="flex justify-end mt-6">
-          <Button onClick={onSubmit} disabled={isExpired}>
-            {/* {assignment.submissions.length > 0 ? "Resubmit Assignment" : "Submit Assignment"} */}
-            Submit Assignment
-          </Button>
-        </div>
-      )}
+      
+    
     </div>
   );
 };
